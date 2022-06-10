@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+    <script>
+        $(() => {
+            const url = "1333.T"
+            new Promise((resolve, reject) => {
+                $("#calendar").attr('src', `/carendar?path=${encodeURIComponent('action=tp4&sa=schedule')}`);
+                resolve();
+            })();
+        });
+
+        // function iframe() {
+        // }
+        document.addEventListener('DOMContentLoaded', event => {
+            document.getElementById('calendar').onload = () => {
+                const aElem = document.getElementById('calendar').contentWindow.document.querySelectorAll('a');
+                Array.from(aElem).forEach(link => link.addEventListener(
+                    'click', (event) => {
+                        event.preventDefault();
+                        const href = event.currentTarget.getAttribute('href');
+                        if (href.indexOf("index.php?") !== -1) {
+                            const path = href.split('?')[1];
+                            $("#calendar").attr('src', `/carendar?path=${encodeURIComponent(path)}`);
+                        }
+                    })
+                );
+
+                const codeElem = document.getElementById('calendar').contentWindow.document.querySelectorAll('#str-main > table > tbody > tr > td:nth-child(1) > a');
+                Array.from(codeElem).forEach(link => link.addEventListener(
+                    'click', (event) => {
+                        $("#first").attr('src', `https://www.nikkei.com/nkd/company/chart/?type=3month&scode=${event.currentTarget.innerText}&ba=1#JSID_chart`);
+                        $("#second").attr('src', `https://kabuyoho.jp/reportTop?bcode=${event.currentTarget.innerText}`);
+                    })
+                );
+            };
+        });
+    </script>
+</head>
+<body>
+    <div style="display: flex;">
+        <div style="width:50%;height:750px;">
+            <iframe id="calendar" width="100%" height="100%"></iframe>
+        </div>
+        <div style="width:50%;height:750px;">
+            <div style="height:50%;">
+                <iframe id="first" width="100%" height="100%"></iframe>
+            </div>
+            <div style="height:50%;margin-top: 10px;">
+                <iframe id="second" width="100%" height="100%"></iframe>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
