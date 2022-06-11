@@ -6,13 +6,19 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
-    <script>
-        $(()=>{$("#calendar").attr("src",`/carendar?path=${encodeURIComponent("action=tp4&sa=schedule")}`)}),document.addEventListener("DOMContentLoaded",a=>{document.getElementById("calendar").onload=()=>{let a=document.getElementById("calendar").contentWindow.document.querySelectorAll("a");Array.from(a).forEach(a=>a.addEventListener("click",a=>{a.preventDefault();let b=a.currentTarget.getAttribute("href");if(-1!==b.indexOf("index.php?")){let c=b.split("?")[1];$("#calendar").attr("src",`/carendar?path=${encodeURIComponent(c)}`)}}));let b=document.getElementById("calendar").contentWindow.document.querySelectorAll("#str-main > table > tbody > tr > td:nth-child(1) > a");Array.from(b).forEach(a=>a.addEventListener("click",a=>{$("#first").attr("src",`https://www.nikkei.com/nkd/company/chart/?type=3month&scode=${a.currentTarget.innerText}&ba=1#JSID_chart`),$("#second").attr("src",`https://kabuyoho.jp/reportTop?bcode=${a.currentTarget.innerText}`)}))}})
-    </script>
     <!-- <script>
+        $(()=>{$("#calendar").attr("src",`/carendar?path=${encodeURIComponent("action=tp4&sa=schedule")}`),$("#close").on("click",()=>{$.ajax("close"),$("#calendar").attr("src",""),alert("\u7D42\u4E86\u3057\u307E\u3057\u305F\u3002")})}),document.addEventListener("DOMContentLoaded",a=>{document.getElementById("calendar").onload=()=>{let a=document.getElementById("calendar").contentWindow.document.querySelectorAll("a");Array.from(a).forEach(a=>a.addEventListener("click",a=>{a.preventDefault();let b=a.currentTarget.getAttribute("href");if(-1!==b.indexOf("index.php?")){let c=b.split("?")[1];$("#calendar").attr("src",`/carendar?path=${encodeURIComponent(c)}`)}}));let b=document.getElementById("calendar").contentWindow.document.querySelectorAll("#str-main > table > tbody > tr > td:nth-child(1) > a");Array.from(b).forEach(a=>a.addEventListener("click",a=>{$("#first").attr("src",`https://www.nikkei.com/nkd/company/chart/?type=3month&scode=${a.currentTarget.innerText}&ba=1#JSID_chart`),$("#second").attr("src",`https://kabuyoho.jp/reportTop?bcode=${a.currentTarget.innerText}`)}))}})
+    </script> -->
+    <script>
         $(() => {
             $("#calendar").attr('src', `/carendar?path=${encodeURIComponent('action=tp4&sa=schedule')}`);
+            $('#close').on('click', () => {
+                $.ajax('close');
+                $("#calendar").attr('src', '');
+                alert('終了しました。')
+            })
         });
+
 
         document.addEventListener('DOMContentLoaded', event => {
             document.getElementById('calendar').onload = () => {
@@ -37,9 +43,12 @@
                 );
             };
         });
-    </script> -->
+    </script>
 </head>
 <body>
+    <div style="margin-bottom: 5px;">
+        <button type="button" id="close">終了する</button>
+    </div>
     <div style="display: flex;">
         <div style="width:50%;height:750px;">
             <iframe id="calendar" width="100%" height="100%"></iframe>

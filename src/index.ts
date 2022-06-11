@@ -2,6 +2,7 @@ import DomParser from "dom-parser";
 import webdriver, { Builder, By, until } from "selenium-webdriver";
 import chrome from 'selenium-webdriver/chrome';
 import express, { Application, Request, Response } from 'express';
+import process from 'process';
 
 const app: Application = express()
 const PORT = 3000
@@ -28,6 +29,10 @@ const relativeToabsolute = (dom: DomParser.Dom): Array<string> => {
 
 app.get('/', async (_req: Request, res: Response) => {
     return res.status(200).sendFile(__dirname + "/index.html")
+});
+
+app.get('/close', async (_req: Request, res: Response) => {
+    process.kill(process.pid);
 });
 
 app.get('/carendar', async (req: Request, res: Response) => {
