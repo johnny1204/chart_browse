@@ -37,7 +37,7 @@
                 const codeElem = document.getElementById('calendar').contentWindow.document.querySelectorAll('#str-main > table > tbody > tr > td:nth-child(1) > a');
                 Array.from(codeElem).forEach(link => link.addEventListener(
                     'click', (event) => {
-                        $("#first").attr('src', `https://www.nikkei.com/nkd/company/chart/?type=3month&scode=${event.currentTarget.innerText}&ba=1#JSID_chart`);
+                        $("#first").attr('src', `https://www.nikkei.com/nkd/company/chart/?type=shuasi&scode=${event.currentTarget.innerText}&ba=1#JSID_chart`);
                         $("#second").attr('src', `https://kabuyoho.jp/reportTop?bcode=${event.currentTarget.innerText}`);
                     })
                 );
