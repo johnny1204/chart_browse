@@ -1,1 +1,5 @@
 node_modules/*
+src/node_modules/*
+yarn-error.log
+Browsing-win32-x64/*
+ChartBrowser-darwin-x64/*

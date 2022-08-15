@@ -1,36 +1,26 @@
 {
-  "dependencies": {
-    "@types/dom-parser": "^0.1.1",
-    "@types/jquery": "^3.5.14",
-    "axios": "^0.27.2",
-    "dom-parser": "^0.1.6",
-    "express": "^4.18.1",
-    "jquery": "^3.6.0",
-    "request": "^2.88.2"
-  },
-  "name": "browse",
-  "version": "1.0.0",
-  "main": "index.js",
-  "devDependencies": {
-    "@types/express": "^4.17.13",
-    "@types/node": "^17.0.31",
-    "@types/request": "^2.48.8",
-    "@types/selenium-webdriver": "^4.0.20",
-    "npm-run-all": "^4.1.5",
-    "opener": "^1.5.2",
-    "selenium-webdriver": "^4.1.2",
-    "ts-node": "^10.7.0",
-    "typescript": "^4.6.4",
-    "wait-on": "^6.0.1"
-  },
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "serve": "ts-node src/index.ts",
-    "browser": "wait-on http://localhost:3000/ && opener http://localhost:3000/",
-    "start": "npm-run-all -p serve browser"
-  },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
-  "description": ""
-}
+    "devDependencies": {
+        "electron": "^19.0.10",
+        "electron-builder": "^23.1.0",
+        "electron-packager": "^15.5.1"
+    },
+    "scripts": {
+      "test": "echo \"Error: no test specified\" && exit 1",
+      "serve": "ts-node ./index.ts",
+      "browser": "wait-on http://localhost:3000/ && opener http://localhost:3000/",
+      "start": "npm-run-all -p serve browser",
+      "build": "webpack",
+      "mac": "npx electron-packager ./src Browsing --platform=darwin --arch=x64 --overwrite",
+      "windows": "npx electron-packager ./src Browsing --platform=win32 --arch=x64 --overwrite",
+      "electron:build": "electron-builder --mac --x64 --dir",
+      "webdriver": "webdriver-manager start",
+      "webdriver-update": "webdriver-manager update --standalone"
+    },
+    "keywords": [],
+    "author": "",
+    "license": "ISC",
+    "description": "",
+    "name": "chart-browse",
+    "version": "1.0.0",
+    "main": "main.js"
+}  

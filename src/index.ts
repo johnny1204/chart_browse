@@ -1,13 +1,10 @@
 import DomParser from "dom-parser";
-import webdriver, { Builder, By, until } from "selenium-webdriver";
-import chrome from 'selenium-webdriver/chrome';
 import express, { Application, Request, Response } from 'express';
 import process from 'process';
+const puppeteer = require('puppeteer');
 
 const app: Application = express()
 const PORT = 3000
-
-const options = new chrome.Options().headless().windowSize({ width: 1280, height: 720 });
 
 const relativeToabsolute = (dom: DomParser.Dom): Array<string> => {
     const hrefs: Array<string> = []
@@ -23,7 +20,7 @@ const relativeToabsolute = (dom: DomParser.Dom): Array<string> => {
             hrefs.push(href)
         }
     })
-
+    
     return hrefs;
 }
 
@@ -36,11 +33,13 @@ app.get('/close', async (_req: Request, res: Response) => {
 });
 
 app.get('/carendar', async (req: Request, res: Response) => {
-    const driver = new Builder().forBrowser('chrome').setChromeOptions(options).build();
+    const browser = await puppeteer.launch();
+    const page = await browser.newPage();
+
     const path = req.query.path as string
-    await driver.get(`https://daiwa.ifis.co.jp/index.php?${decodeURIComponent(path)}`);
-    let renderHtml: string = await driver.getPageSource();
-    driver.close()
+    await page.goto(`https://daiwa.ifis.co.jp/index.php?${decodeURIComponent(path)}`);
+    let renderHtml: string = await page.content();
+    browser.close()
 
     const parser = new DomParser();
     let dom = parser.parseFromString(renderHtml);
