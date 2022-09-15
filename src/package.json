@@ -36,7 +36,8 @@
     "start": "npm-run-all -p serve browser",
     "build": "webpack",
     "webdriver": "webdriver-manager start",
-    "webdriver-update": "webdriver-manager update --standalone"
+    "webdriver-update": "webdriver-manager update --standalone",
+    "electron": "electron ."
   },
   "devDependencies": {
       "electron": "^19.0.10",
